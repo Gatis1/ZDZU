@@ -1,17 +1,20 @@
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class AimCursorJoystick : MonoBehaviour
 {
     [Header("REFERENCES")]
     public Joystick joystick;
-    public GameObject AimCursor;
+    public RectTransform AimCursor;
 
     [Header("INPUT")]
     public Vector2 moveInput;
 
     [Header("AIM SETTINGS")] 
     public float aimSensitivity;
+    public float CameraToCursorSensitivity;
 
     public bool CursorIsInsideScreen = true;
 
@@ -34,7 +37,7 @@ public class AimCursorJoystick : MonoBehaviour
          */
         
         // Convert coordinates of cursor to 
-        Vector3 CursorsScreenPos = Camera.main.WorldToScreenPoint(AimCursor.transform.position);
+        Vector3 CursorsScreenPos = Camera.main.WorldToScreenPoint(AimCursor.position);
         
         // Check if the cursor is in the screen. If it is, do nothing. If it isn't, rotate thee comera towards the cursor
         if (CursorsScreenPos.x < 0 || CursorsScreenPos.x > Screen.width ||
@@ -57,8 +60,7 @@ public class AimCursorJoystick : MonoBehaviour
         // Calculate the rotation to face the target
         Quaternion desiredRotation = Quaternion.LookRotation(CursorPos);
         
-        // Apply rotation of camera
-        transform.rotation = desiredRotation;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, CameraToCursorSensitivity * Time.deltaTime);
 
     }
     
