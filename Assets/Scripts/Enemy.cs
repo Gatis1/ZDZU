@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         swarm();
+
+        if(!CheckHealth())
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void swarm(){transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
@@ -44,7 +49,7 @@ public class Enemy : MonoBehaviour
 
     public bool CheckHealth()
     {
-        bool healthState = false;
+        bool healthState = true;
         if(healthValue <= 0.0f)
         {
             healthState = false;
@@ -77,10 +82,6 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.tag == "ball")
         {
             CheckAttack(collision);
-        }
-        if(!CheckHealth())
-        {
-            Destroy(this.gameObject);
         }
     }
 }

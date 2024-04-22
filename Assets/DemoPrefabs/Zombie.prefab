@@ -129,3 +129,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 999918896159262552, guid: de75a409cbbfe0643ab6b03131e5f0fb, type: 3}
   mvSpd: 1
+  healthValue: 1
+  attackValue: 0
