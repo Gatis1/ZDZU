@@ -1,3 +1,4 @@
+using System;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,10 +16,13 @@ public class AimCursorJoystick : MonoBehaviour
     [Header("AIM SETTINGS")] 
     public float aimSensitivity;
     public float CameraToCursorSensitivity;
+    [Range(0f, .5f)]
+    public float cursorLimitsRelativeToScreen;
 
     public bool CursorIsInsideScreen = true;
 
-    void Update()
+    
+void Update()
     {
         // Get joystick input
         moveInput = joystick.Direction;
@@ -29,39 +33,36 @@ public class AimCursorJoystick : MonoBehaviour
         // and calculate the desired movement
         Vector3 DesiredMovement = moveDirection * aimSensitivity;
 
-        // Apply movement
         AimCursor.transform.position += DesiredMovement;
 
-        /*
-         * Now, if the cursor reaches the edge of the screen, or gets close to it, then rotate camera towards cursor
-         */
+        // Check the cursor position relative to the canvas size (to check if it's whitihin the screen)
+        Vector3 CursorsScreenPos = AimCursor.anchoredPosition;
+        Vector2 canvasSize = AimCursor.root.GetComponent<RectTransform>().sizeDelta;
+        Vector2 positionRelativeToScreenSize = new Vector2(CursorsScreenPos.x / canvasSize.x, CursorsScreenPos.y / canvasSize.y);   
         
-        // Convert coordinates of cursor to 
-        Vector3 CursorsScreenPos = Camera.main.WorldToScreenPoint(AimCursor.position);
-        
+
         // Check if the cursor is in the screen. If it is, do nothing. If it isn't, rotate thee comera towards the cursor
-        if (CursorsScreenPos.x < 0 || CursorsScreenPos.x > Screen.width ||
-            CursorsScreenPos.y < 0 || CursorsScreenPos.y > Screen.height)
+        if ((positionRelativeToScreenSize.x > -cursorLimitsRelativeToScreen && positionRelativeToScreenSize.x < cursorLimitsRelativeToScreen) &&
+            (positionRelativeToScreenSize.y > -cursorLimitsRelativeToScreen && positionRelativeToScreenSize.y < cursorLimitsRelativeToScreen))
         {
-            CursorIsInsideScreen = false;
-            RotateCameraTowardsCursor();
+            CursorIsInsideScreen = true;
+            // Apply movement
         }
         else
         {
-            CursorIsInsideScreen = true;
+            CursorIsInsideScreen = false;
+            // Clamp the position within the screen bounds
+            positionRelativeToScreenSize.x = Mathf.Clamp(positionRelativeToScreenSize.x, -cursorLimitsRelativeToScreen, cursorLimitsRelativeToScreen);
+            positionRelativeToScreenSize.y = Mathf.Clamp(positionRelativeToScreenSize.y, -cursorLimitsRelativeToScreen, cursorLimitsRelativeToScreen);
+
+            // Make a new position where player is whithin position, but still with the updated desired position
+            Vector2 newPos = new Vector2(positionRelativeToScreenSize.x * canvasSize.x, positionRelativeToScreenSize.y * canvasSize.y);   
+
+            // Update the position
+            AimCursor.anchoredPosition = newPos;
         }
     }
 
-    private void RotateCameraTowardsCursor()
-    {
-        // Get aim cursors position based on camera's POV
-        Vector3 CursorPos = AimCursor.transform.position - transform.position;
 
-        // Calculate the rotation to face the target
-        Quaternion desiredRotation = Quaternion.LookRotation(CursorPos);
-        
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, CameraToCursorSensitivity * Time.deltaTime);
-
-    }
     
 }
