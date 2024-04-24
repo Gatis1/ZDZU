@@ -370,5 +370,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8803090983996141660, guid: f19b8ec7faa4aa240b5b6ab8f90c536b, type: 3}
+      propertyPath: m_Name
+      value: BatAnimation
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f19b8ec7faa4aa240b5b6ab8f90c536b, type: 3}
