@@ -1,8 +1,7 @@
 # ZDZU
  CS-596 Final Game
 
-ZDZU
-Zombie-Diego Ztate University
+ZDZU: Zombie-Diego Ztate University by - Gerome Atis, Lucio Beltran, Jonathan Garcia Rodriguez, Manuel Osuna, Bibin Sibi
 
 Description - A beat-em-up zombie survival game that takes place at SDSU itself. The main characters find themselves trapped on the SDSU campus during a zombie apocalypse and have to fight their way out. This involves pathing through the school, with multiple routes each route giving you different encounters, from a weapons room to zombie hoards. Navigation through campus is the only way to freedom!
 
