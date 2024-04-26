@@ -323,7 +323,7 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   aimSensitivity: 1
   CameraToCursorSensitivity: 0.1
-  cursorLimitsRelativeToScreen: -0.23
+  cursorLimitsRelativeToScreen: 0.5
   CursorIsInsideScreen: 1
 --- !u!1 &436859781
 GameObject:
