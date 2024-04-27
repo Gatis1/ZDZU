@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,21 +11,18 @@ public class Shooting : MonoBehaviour
     {
         // Add listener to the button's onClick event
         shootingButton.onClick.AddListener(Shoot);
-        
     }
-
-
+    
     public void Shoot()
     {
+        // Shoot from the cursor
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
-        RaycastHit hit;
-        float infinity = Mathf.Infinity;
-        
-        if (Physics.Raycast(ray, out hit, infinity, EnemyLayerMask))
+
+        // if the cursor hits an enemy
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, EnemyLayerMask))
         {
+            // Do something
             Debug.Log(hit.transform.gameObject.name + " takes X amount of DAMAGE");
-            
         }
-        
     }
 }
