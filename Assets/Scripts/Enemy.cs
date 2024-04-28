@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,18 +7,45 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float mvSpd = 1.0f;
     [SerializeField] float healthValue, attackValue;
 
+    public TypeOfZombie type;
+    public float physicalATK;
+    public float mentalATK;
+    
+    public bool CanHit = true;
+    public float CoolDown = 1.5f;
+
+
+    public enum TypeOfZombie
+    {
+        CS,
+        Business,
+        Art,
+        Music
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType(typeof(Player)) as Player;
         CheckHealth();
+        
+        // Give appropriate health based on the zombie type
+        UpdateHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
-        swarm();
-
+        if (!CanHit)
+        {
+            // Start cooldown time
+            StartCoroutine(Cooldown());
+        }
+        else
+        {
+            swarm(); 
+        }
+        
         if(!CheckHealth())
         {
             Destroy(this.gameObject);
@@ -30,19 +56,27 @@ public class Enemy : MonoBehaviour
 
     public void UpdateHealth()
     {
-        switch (this.gameObject.name)
+        switch (type)
         {
-            case "computer science":
+            case TypeOfZombie.CS:
                 healthValue = 3.0f;
+                physicalATK = 1.0f;
+                mentalATK = 5.0f;
                 break;
-            case "business":
+            case TypeOfZombie.Business:
                 healthValue = 5.0f;
+                physicalATK = 2.0f;
+                mentalATK = 2.0f;
                 break;
-            case "art":
+            case TypeOfZombie.Art:
                 healthValue = 10.0f;
+                physicalATK = 4.0f;
+                mentalATK = 1.5f;
                 break;
-            case "music theory":
+            case TypeOfZombie.Music:
                 healthValue = 7.0f;
+                physicalATK = 3.0f;
+                mentalATK = 2.0f;
                 break;
         }
     }
@@ -75,6 +109,12 @@ public class Enemy : MonoBehaviour
                 break;
         }
         return attackValue;
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(CoolDown);
+        CanHit = true;
     }
 
     private void OnCollisionEnter(Collision collision)
