@@ -15,7 +15,6 @@ public class AimCursorJoystick : MonoBehaviour
 
     [Header("AIM SETTINGS")] 
     public float aimSensitivity;
-    public float CameraToCursorSensitivity;
     [Range(0f, .5f)]
     public float cursorLimitsRelativeToScreen;
 
