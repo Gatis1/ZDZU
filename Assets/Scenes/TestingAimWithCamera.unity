@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7186776580474958610, guid: f19b8ec7faa4aa240b5b6ab8f90c536b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8803090982864892877, guid: f19b8ec7faa4aa240b5b6ab8f90c536b, type: 3}
       propertyPath: m_Name
       value: Capsule
@@ -1045,6 +1049,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8bfab4ee993574a8f7352e6a3bfd23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OGball: {fileID: 1296749497}
+  ball: {fileID: 5107584633271645126, guid: a682896b2e2020546952e61cfc787d22, type: 3}
+  ballToShoot: {fileID: 0}
+  target: {fileID: 0}
+  TimeForBallToReachEnemy: 2
   shootingButton: {fileID: 1548025525}
   cursor: {fileID: 1095453149}
   EnemyLayerMask:
@@ -1087,6 +1096,8 @@ GameObject:
   - component: {fileID: 1263057400}
   - component: {fileID: 1263057399}
   - component: {fileID: 1263057398}
+  - component: {fileID: 1263057403}
+  - component: {fileID: 1263057402}
   m_Layer: 3
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -1172,6 +1183,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263057402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263057397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963c00e6fa284d749bc02422e88d08b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1263057403
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263057397}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &1296749497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8803090983636280805, guid: f19b8ec7faa4aa240b5b6ab8f90c536b, type: 3}
+  m_PrefabInstance: {fileID: 177035638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1403994738
 GameObject:
   m_ObjectHideFlags: 0

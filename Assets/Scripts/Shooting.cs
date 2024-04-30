@@ -6,8 +6,10 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     [Header("REFERENCES")] 
-    public GameObject ball;
+    public GameObject OGball; 
     public static bool ReadyToShootBall = false;
+    public GameObject ball;
+    public GameObject ballToShoot;
 
     [Header("TARGET")]
     public Transform target;
@@ -26,15 +28,6 @@ public class Shooting : MonoBehaviour
         // Add listener to the button's onClick event
         shootingButton.onClick.AddListener(Shoot);
         target = null;
-        
-        
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
-        Debug.Log(Mathf.MoveTowards(test, 10, 3));
     }
     
     public void Shoot()
@@ -42,7 +35,7 @@ public class Shooting : MonoBehaviour
         // Start animation
         animator.SetBool("hit", true);
         
-        // Shoot from the cursor
+        // Shoot RAY from the cursor to get data on enemy if there is an enemy
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
         // if the cursor hits an enemy
@@ -58,16 +51,26 @@ public class Shooting : MonoBehaviour
     private void Update()
     {
         // If the animation ends start ball movement
-        if (ReadyToShootBall)
+        if (ReadyToShootBall && target != null)
         {
+            Debug.Log(ReadyToShootBall);
+
+            // Make a new ball. This ball will be the one to shoot
+            if (ballToShoot == null)
+            {
+                ballToShoot = Instantiate(ball, OGball.transform.position, Quaternion.identity);
+            }
+            
             // If we have a target, move the ball towards the enemy
-            ball.transform.position = Vector3.MoveTowards(ball.transform.position, target.position, TimeForBallToReachEnemy);
+            ballToShoot.transform.position = Vector3.MoveTowards(ballToShoot.transform.position, target.position, TimeForBallToReachEnemy);
             
             // if the ball has reached the enemy, 
-            if (ball.transform.position == target.position)
+            if (ballToShoot.transform.position == target.position)
             {
+                Debug.Log("Ball reached target");
                 target = null;
                 ReadyToShootBall = false;
+                Destroy(ballToShoot);
             }
         }
     }
