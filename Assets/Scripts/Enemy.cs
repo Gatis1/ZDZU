@@ -10,9 +10,12 @@ public class Enemy : MonoBehaviour
     public TypeOfZombie type;
     public float physicalATK;
     public float mentalATK;
+
+    public EnemyState action;
     
     public bool CanHit = true;
     public float CoolDown = 1.5f;
+    private float distance;
 
 
     public enum TypeOfZombie
@@ -21,6 +24,13 @@ public class Enemy : MonoBehaviour
         Business,
         Art,
         Music
+    }
+
+    public enum EnemyState : int
+    {
+        Melee = 0,
+        Shoot = 1,
+        stop
     }
     
     // Start is called before the first frame update
@@ -36,23 +46,42 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //get the distance between the player and enemies for attacking logic.
+        distance = Vector3.Distance(transform.position, player.transform.position);
+
         if (!CanHit)
         {
             // Start cooldown time
             StartCoroutine(Cooldown());
-        }
-        else
-        {
-            swarm(); 
         }
         
         if(!CheckHealth())
         {
             Destroy(this.gameObject);
         }
+
+        switch(action)
+        {
+            case EnemyState.Melee:
+            swarm();
+            //do a melee attack
+            break;
+
+            case EnemyState.Shoot:
+            swarm();
+            //shoot at the player
+            break;
+        }
     }
 
-    private void swarm(){transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
+    private void swarm()
+    {
+        //the enemies will stop at a certian distance from the player and perform their actions accordingly
+        if ((action == EnemyState.Melee && distance >= 1.5f) || (action == EnemyState.Shoot && distance > 5.0f))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);
+        }
+    }
 
     public void UpdateHealth()
     {
@@ -122,6 +151,7 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.tag == "ball")
         {
             CheckAttack(collision);
+            healthValue -= attackValue;
         }
     }
 }

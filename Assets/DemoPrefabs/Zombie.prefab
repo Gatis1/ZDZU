@@ -134,3 +134,5 @@ MonoBehaviour:
   type: 0
   physicalATK: 0
   mentalATK: 0
+  CanHit: 1
+  CoolDown: 1.5
