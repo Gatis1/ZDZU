@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     {
         Melee = 0,
         Shoot = 1,
+        Buff = 2,
+        Explode = 3,
         stop
     }
     
@@ -39,8 +41,8 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindObjectOfType(typeof(Player)) as Player;
         CheckHealth();
         
-        // Give appropriate health based on the zombie type
-        UpdateHealth();
+        // Give appropriate stats based on the zombie type
+        UpdateStats();
     }
 
     // Update is called once per frame
@@ -71,6 +73,16 @@ public class Enemy : MonoBehaviour
             swarm();
             //shoot at the player
             break;
+
+            case EnemyState.Buff:
+            swarm();
+            //Do a buffing function
+            break;
+
+            case EnemyState.Explode:
+            swarm();
+            //run up to player 
+            break;
         }
     }
 
@@ -83,7 +95,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void UpdateHealth()
+    public void UpdateStats()
     {
         switch (type)
         {
