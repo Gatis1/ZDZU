@@ -20,29 +20,21 @@ public class PlayerHealth : MonoBehaviour
     {
         
     }
-
-    public void LifeValue(GameObject enemyType)
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        switch(enemyType.name)
+        if(collision.gameObject.tag == "Enemy")
         {
-            case "computer science":
-                physical -= 1.0f;
-                mental -= -5.0f;
-                break;
-            case "business":
-                physical -= 2.0f;
-                mental -= -2.0f;
-                break;
-            case "Art":
-                physical -= 4.0f;
-                mental -= -1.5f;
-                break;
-            case "music theory":
-                physical -= 3.0f;
-                mental -= -2.0f;
-                break;
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemy.CanHit)
+            {
+                physical -= enemy.physicalATK;
+                mental -= enemy.mentalATK;
+            }
         }
     }
+
 
     /*
      * We can have one game over function that loads the game over scene, and additionally have three functions.
@@ -60,15 +52,10 @@ public class PlayerHealth : MonoBehaviour
             /* Either a new scene where we present the player with the game over screen and message.
              * This could be a new scene, or a canvas pops up and covers the entire screen. This acts as as the game over screen without loading a new scene.
              */
-            SceneManager.LoadScene("Retry");
+            Debug.Log("Game Over");
+            //SceneManager.LoadScene("Retry");
+            
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "zombie")
-        {
-            LifeValue(collision.gameObject);
-        }
-    }
+    
 }

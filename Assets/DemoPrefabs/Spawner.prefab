@@ -47,3 +47,4 @@ MonoBehaviour:
   zombie: {fileID: 6358863832478632320, guid: 2c922e0ebfa9b6949aec7a8cdb3b1b8a, type: 3}
   spawnTime: 1
   enemyNum: 5
+  spawningRadiusAroundSpawner: 5
