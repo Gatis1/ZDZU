@@ -9,6 +9,6 @@ public class baseballAnimationEvents : StateMachineBehaviour
     {
         counter++;
         // Once the animation ends, we are ready to SHOOT the ball
-        Shooting.ReadyToShootBall = true;
+        //Shooting.ReadyToShootBall = true;
     }
 }
