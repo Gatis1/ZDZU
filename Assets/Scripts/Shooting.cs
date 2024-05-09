@@ -9,6 +9,10 @@ public class Shooting : MonoBehaviour
     public Image cursor;
     public LayerMask EnemyLayerMask;
     public Animator animator;
+    public Enemy zombie;
+
+    // Lucio made it to test/develop zombie damage receiver.
+    Ray ray;
 
     public bool test = false;
 
@@ -22,15 +26,18 @@ public class Shooting : MonoBehaviour
     {
         // Start animation
         animator.SetBool("hit", true);
-        
+
         // Shoot from the cursor
-        Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
+        // Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
+        ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
         // if the cursor hits an enemy
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, EnemyLayerMask))
         {
             // Do something
             Debug.Log(hit.transform.gameObject.name + " takes X amount of DAMAGE");
+            zombie = hit.transform.gameObject.GetComponent<Enemy>();
+            zombie.healthValue -= 1.0f;
         }
     }
 

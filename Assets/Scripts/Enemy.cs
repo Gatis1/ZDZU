@@ -5,7 +5,8 @@ public class Enemy : MonoBehaviour
 {
     public Player player;
     [SerializeField] private float mvSpd = 1.0f;
-    [SerializeField] float healthValue, attackValue;
+    [SerializeField] public float healthValue, attackValue;
+    public bool healthState;
 
     public TypeOfZombie type;
     public float physicalATK;
@@ -13,6 +14,8 @@ public class Enemy : MonoBehaviour
     
     public bool CanHit = true;
     public float CoolDown = 1.5f;
+
+    private EnemySpawner enemyCount;
 
 
     public enum TypeOfZombie
@@ -27,7 +30,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType(typeof(Player)) as Player;
-        CheckHealth();
+        //CheckHealth();
         
         // Give appropriate health based on the zombie type
         UpdateHealth();
@@ -36,6 +39,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!CheckHealth())
+        {
+            Destroy(this.gameObject);
+            enemyCount.EnemyKilled();
+
+        }
+
         if (!CanHit)
         {
             // Start cooldown time
@@ -45,17 +55,13 @@ public class Enemy : MonoBehaviour
         {
             swarm(); 
         }
-        
-        if(!CheckHealth())
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     private void swarm(){transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
 
     public void UpdateHealth()
     {
+        enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
         {
             case TypeOfZombie.CS:
@@ -83,7 +89,7 @@ public class Enemy : MonoBehaviour
 
     public bool CheckHealth()
     {
-        bool healthState = true;
+        healthState = true;
         if(healthValue <= 0.0f)
         {
             healthState = false;
