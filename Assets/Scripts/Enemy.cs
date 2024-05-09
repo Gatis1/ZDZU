@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckHealth();
         //get the distance between the player and enemies for attacking logic.
         distance = Vector3.Distance(transform.position, player.transform.position);
 
@@ -101,26 +102,38 @@ public class Enemy : MonoBehaviour
             break;
 
             case EnemyState.Buff:
+            buffZombies();
             break;
 
             case EnemyState.stop:
             break;
         }
-        
-        if(!CheckHealth())
-        {
-            Destroy(this.gameObject);
-        }
     }
 
+    private void swarm()
+    {
+        if(distance > 1.5f) {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
+    }
+
+    private void meleeAttack()
+    {
+        player.physical -= physicalATK;
+        player.mental -= mentalATK;
+    }    
     private void rangeAttack()
     {
         //The enemy shoot should instantiate an enemy bullet with force towards the player 
     }
 
+    private void buffZombies()
+    {
+        //Check for other zombies in the scene and append a status to them.
+        //Should change the spawner script so that only one CS spawns and cannot spawn another until the other dies.
+    }
+
     public void UpdateStats()
     {
-        enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
+        //enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
         {
             case TypeOfZombie.CS:
