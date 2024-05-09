@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour
             break;
 
             case EnemyState.Buff:
+            buffZombies();
             break;
 
             case EnemyState.stop:
@@ -122,6 +123,12 @@ public class Enemy : MonoBehaviour
     private void rangeAttack()
     {
         //The enemy shoot should instantiate an enemy bullet with force towards the player 
+    }
+
+    private void buffZombies()
+    {
+        //Check for other zombies in the scene and append a status to them.
+        //Should change the spawner script so that only one CS spawns and cannot spawn another until the other dies.
     }
 
     public void UpdateStats()
