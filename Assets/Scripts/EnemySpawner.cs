@@ -45,6 +45,8 @@ public class EnemySpawner : MonoBehaviour
             //Make the enemies vary in what actions they do when they spawn either melee or shooting.
             Enemy enemyState = newZombie.GetComponent<Enemy>();
             enemyState.action = (Enemy.EnemyState)Random.Range(0,2);
+
+            enemyCount++;
         }
     }
 }
