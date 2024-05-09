@@ -28,10 +28,10 @@ public class Enemy : MonoBehaviour
 
     public enum EnemyState : int
     {
-        Melee = 0,
-        Shoot = 1,
-        Buff = 2,
-        Explode = 3,
+        chase = 0,
+        Melee = 1,
+        Shoot = 2,
+        Buff = 3,
         stop
     }
     
@@ -56,43 +56,72 @@ public class Enemy : MonoBehaviour
             // Start cooldown time
             StartCoroutine(Cooldown());
         }
-        
+    
         if(!CheckHealth())
         {
             Destroy(this.gameObject);
         }
 
+        //Added if statements to check for the types of zombies and what actions they should do
+        //Business is melee head to player and attack once they reach a certian distance.
+        if(type == TypeOfZombie.Business)
+        {
+            if(distance > 1.5f)
+            {
+                action = EnemyState.chase;
+            }
+            else
+            {
+                action = EnemyState.Melee;
+            }
+        }
+        //CS is a buffing character should append a one of two states (debating) an invincibility state to other zombies that are not CS
+        //or a state where they do not take dmg until getting hit once.
+        else if(type == TypeOfZombie.CS) {action = EnemyState.Buff;}
+        //Music is a range character that once they spawn shoots at the player
+        else if(type == TypeOfZombie.Music) {action = EnemyState.Shoot;}
+        //Other types just do nothing and act as free points for the player to get
+        else {action = EnemyState.stop;}
+
         switch(action)
         {
-            case EnemyState.Melee:
+            case EnemyState.chase:
             swarm();
-            //do a melee attack
+            break;
+
+            case EnemyState.Melee:
+            meleeAttack();
             break;
 
             case EnemyState.Shoot:
-            swarm();
-            //shoot at the player
+            rangeAttack();
             break;
 
             case EnemyState.Buff:
-            swarm();
-            //Do a buffing function
             break;
 
-            case EnemyState.Explode:
-            swarm();
-            //run up to player 
+            case EnemyState.stop:
             break;
         }
     }
 
     private void swarm()
     {
-        //the enemies will stop at a certian distance from the player and perform their actions accordingly
-        if ((action == EnemyState.Melee && distance >= 1.5f) || (action == EnemyState.Shoot && distance > 5.0f))
+        if(distance > 1.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);
         }
+    }
+
+    private void meleeAttack()
+    {
+        player.physical -= physicalATK;
+        player.mental -= mentalATK;
+    }
+
+    private void rangeAttack()
+    {
+        //The enemy shoot should instantiate an enemy bullet with force towards the player 
     }
 
     public void UpdateStats()
@@ -132,7 +161,7 @@ public class Enemy : MonoBehaviour
         return healthState;
     }
 
-    private float CheckAttack(Collision collision)
+    private float CheckAttack(Collider collision)
     {
         switch(collision.gameObject.tag)
         {
@@ -158,7 +187,7 @@ public class Enemy : MonoBehaviour
         CanHit = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.tag == "ball")
         {
