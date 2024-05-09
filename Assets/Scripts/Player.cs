@@ -14,27 +14,6 @@ public class Player : MonoBehaviour
         playerBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-
-            if (enemy.CanHit)
-            {
-                physical -= enemy.physicalATK;
-                mental -= enemy.mentalATK;
-            }
-        }
-    }
-
-
     /*
      * We can have one game over function that loads the game over scene, and additionally have three functions.
      * One for each of the different type of game over screens. This way everything can be modular and not have long functions and to have more flexibility.
