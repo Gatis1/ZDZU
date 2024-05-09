@@ -9,8 +9,6 @@ public class Shooting : MonoBehaviour
     public Image cursor;
     public LayerMask EnemyLayerMask;
     public Animator animator;
-
-    public float test = 0;
     
     void Start()
     {
@@ -29,13 +27,10 @@ public class Shooting : MonoBehaviour
         // if the cursor hits an enemy
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, EnemyLayerMask))
         {
+            // Do stuff!!!
             Debug.Log(hit.transform.gameObject.name + " takes X amount of DAMAGE");
+            Destroy(hit.transform.gameObject);
         }
     }
 
-    // This method below depends on the animation script for baseball
-    private void Update()
-    {
-       
-    }
 }
