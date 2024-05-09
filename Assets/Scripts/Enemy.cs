@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckHealth();
         //get the distance between the player and enemies for attacking logic.
         distance = Vector3.Distance(transform.position, player.transform.position);
 
@@ -107,13 +108,18 @@ public class Enemy : MonoBehaviour
             case EnemyState.stop:
             break;
         }
-        
-        if(!CheckHealth())
-        {
-            Destroy(this.gameObject);
-        }
     }
 
+    private void swarm()
+    {
+        if(distance > 1.5f) {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
+    }
+
+    private void meleeAttack()
+    {
+        player.physical -= physicalATK;
+        player.mental -= mentalATK;
+    }    
     private void rangeAttack()
     {
         //The enemy shoot should instantiate an enemy bullet with force towards the player 
@@ -127,7 +133,7 @@ public class Enemy : MonoBehaviour
 
     public void UpdateStats()
     {
-        enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
+        //enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
         {
             case TypeOfZombie.CS:
