@@ -11,9 +11,12 @@ public class Enemy : MonoBehaviour
     public TypeOfZombie type;
     public float physicalATK;
     public float mentalATK;
+
+    public EnemyState action;
     
     public bool CanHit = true;
     public float CoolDown = 1.5f;
+    private float distance;
 
     private EnemySpawner enemyCount;
 
@@ -25,6 +28,15 @@ public class Enemy : MonoBehaviour
         Art,
         Music
     }
+
+    public enum EnemyState : int
+    {
+        chase = 0,
+        Melee = 1,
+        Shoot = 2,
+        Buff = 3,
+        stop
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -32,34 +44,81 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindObjectOfType(typeof(Player)) as Player;
         //CheckHealth();
         
-        // Give appropriate health based on the zombie type
-        UpdateHealth();
+        // Give appropriate stats based on the zombie type
+        UpdateStats();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!CheckHealth())
-        {
-            Destroy(this.gameObject);
-            enemyCount.EnemyKilled();
-
-        }
+        //get the distance between the player and enemies for attacking logic.
+        distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (!CanHit)
         {
             // Start cooldown time
             StartCoroutine(Cooldown());
         }
-        else
+    
+        if(!CheckHealth())
         {
-            swarm(); 
+            Destroy(this.gameObject);
+        }
+
+        //Added if statements to check for the types of zombies and what actions they should do
+        //Business is melee head to player and attack once they reach a certian distance.
+        if(type == TypeOfZombie.Business)
+        {
+            if(distance > 1.5f)
+            {
+                action = EnemyState.chase;
+            }
+            else
+            {
+                action = EnemyState.Melee;
+            }
+        }
+        //CS is a buffing character should append a one of two states (debating) an invincibility state to other zombies that are not CS
+        //or a state where they do not take dmg until getting hit once.
+        else if(type == TypeOfZombie.CS) {action = EnemyState.Buff;}
+        //Music is a range character that once they spawn shoots at the player
+        else if(type == TypeOfZombie.Music) {action = EnemyState.Shoot;}
+        //Other types just do nothing and act as free points for the player to get
+        else {action = EnemyState.stop;}
+
+        switch(action)
+        {
+            case EnemyState.chase:
+            swarm();
+            break;
+
+            case EnemyState.Melee:
+            meleeAttack();
+            break;
+
+            case EnemyState.Shoot:
+            rangeAttack();
+            break;
+
+            case EnemyState.Buff:
+            break;
+
+            case EnemyState.stop:
+            break;
+        }
+        
+        if(!CheckHealth())
+        {
+            Destroy(this.gameObject);
         }
     }
 
-    private void swarm(){transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);}
+    private void rangeAttack()
+    {
+        //The enemy shoot should instantiate an enemy bullet with force towards the player 
+    }
 
-    public void UpdateHealth()
+    public void UpdateStats()
     {
         enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
@@ -97,7 +156,7 @@ public class Enemy : MonoBehaviour
         return healthState;
     }
 
-    private float CheckAttack(Collision collision)
+    private float CheckAttack(Collider collision)
     {
         switch(collision.gameObject.tag)
         {
@@ -123,11 +182,12 @@ public class Enemy : MonoBehaviour
         CanHit = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.tag == "ball")
         {
             CheckAttack(collision);
+            healthValue -= attackValue;
         }
     }
 }

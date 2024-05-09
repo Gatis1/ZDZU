@@ -34,17 +34,17 @@ public class EnemySpawner : MonoBehaviour
     {
         for(int i = 0; i < enemyNum; i++)
         {
-            // Wait a lil
+            // limits enemy spawning to the spawnTime interval
             yield return new WaitForSeconds(spawnTime);
 
-            // spawn a zombie
+            // spawn enemies
             GameObject newZombie = Instantiate(zombie, Vector3.zero, Quaternion.identity);
             // and make it a child of the spawner so that when we choose it's position, it's around the spawner
             newZombie.transform.parent = this.transform;
             newZombie.transform.localPosition = new Vector3(Random.Range(-spawningRadiusAroundSpawner, spawningRadiusAroundSpawner), 1, Random.Range(-spawningRadiusAroundSpawner, spawningRadiusAroundSpawner));
-            
-            // This will acount for the number of enemies in each level.
-            enemyCount++;
+            //Make the enemies vary in what actions they do when they spawn either melee or shooting.
+            Enemy enemyState = newZombie.GetComponent<Enemy>();
+            enemyState.action = (Enemy.EnemyState)Random.Range(0,2);
         }
     }
 }
