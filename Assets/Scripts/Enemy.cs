@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     public EnemyState action;
     
-    public bool CanHit = true;
+    public bool CanHit;
     public float CoolDown = 1.5f;
     private float distance;
 
@@ -46,6 +46,9 @@ public class Enemy : MonoBehaviour
         
         // Give appropriate stats based on the zombie type
         UpdateStats();
+
+        //Can you hit deez nutz
+        CanHit = true;
     }
 
     // Update is called once per frame
@@ -94,7 +97,10 @@ public class Enemy : MonoBehaviour
             break;
 
             case EnemyState.Melee:
-            meleeAttack();
+            if (CanHit)
+            { 
+                meleeAttack();
+            }
             break;
 
             case EnemyState.Shoot:
@@ -117,9 +123,14 @@ public class Enemy : MonoBehaviour
 
     private void meleeAttack()
     {
-        player.physical -= physicalATK;
-        player.mental -= mentalATK;
-    }    
+        if(CanHit == true)
+        {
+            player.physical -= physicalATK;
+            player.mental -= mentalATK;
+            CanHit = false;
+        }
+    }
+
     private void rangeAttack()
     {
         //The enemy shoot should instantiate an enemy bullet with force towards the player 
