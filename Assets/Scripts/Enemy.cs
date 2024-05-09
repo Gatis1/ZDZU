@@ -5,7 +5,8 @@ public class Enemy : MonoBehaviour
 {
     public Player player;
     [SerializeField] private float mvSpd = 1.0f;
-    [SerializeField] float healthValue, attackValue;
+    [SerializeField] public float healthValue, attackValue;
+    public bool healthState;
 
     public TypeOfZombie type;
     public float physicalATK;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     public bool CanHit = true;
     public float CoolDown = 1.5f;
     private float distance;
+
+    private EnemySpawner enemyCount;
 
 
     public enum TypeOfZombie
@@ -39,7 +42,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType(typeof(Player)) as Player;
-        CheckHealth();
+        //CheckHealth();
         
         // Give appropriate stats based on the zombie type
         UpdateStats();
@@ -104,20 +107,11 @@ public class Enemy : MonoBehaviour
             case EnemyState.stop:
             break;
         }
-    }
-
-    private void swarm()
-    {
-        if(distance > 1.5f)
+        
+        if(!CheckHealth())
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, mvSpd * Time.deltaTime);
+            Destroy(this.gameObject);
         }
-    }
-
-    private void meleeAttack()
-    {
-        player.physical -= physicalATK;
-        player.mental -= mentalATK;
     }
 
     private void rangeAttack()
@@ -133,6 +127,7 @@ public class Enemy : MonoBehaviour
 
     public void UpdateStats()
     {
+        enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
         {
             case TypeOfZombie.CS:
@@ -160,7 +155,7 @@ public class Enemy : MonoBehaviour
 
     public bool CheckHealth()
     {
-        bool healthState = true;
+        healthState = true;
         if(healthValue <= 0.0f)
         {
             healthState = false;

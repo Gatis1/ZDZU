@@ -19,6 +19,7 @@ public class Shooting : MonoBehaviour
     public Image cursor;
     public LayerMask EnemyLayerMask;
     public Animator animator;
+    public Enemy zombie;
 
     public float test = 0;
     
@@ -34,15 +35,13 @@ public class Shooting : MonoBehaviour
         // Start animation
         animator.SetBool("hit", true);
         
-        // Shoot RAY from the cursor to get data on enemy if there is an enemy
+        // Shoot from the cursor
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
         // if the cursor hits an enemy
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, EnemyLayerMask))
         {
             Debug.Log(hit.transform.gameObject.name + " takes X amount of DAMAGE");
-            // Record the hit's transform
-            target = hit.transform;
         }
     }
 
