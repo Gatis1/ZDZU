@@ -147,6 +147,7 @@ public class Enemy : MonoBehaviour
 
         _shotTime = _shotInterval;
 
+        music.Play();
         GameObject enemShot = Instantiate(_zombieShot, _shootPoint.transform.position, Quaternion.identity) as GameObject;
         Rigidbody eShotRig = enemShot.GetComponent<Rigidbody>();
 
@@ -214,6 +215,7 @@ public class Enemy : MonoBehaviour
         {
             CheckAttack(collision);
             healthValue -= attackValue;
+            Hit.Play();
         }
     }
 }
