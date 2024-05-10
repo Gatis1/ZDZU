@@ -21,19 +21,6 @@ public class Player : MonoBehaviour
     private void Update() {
         currHP = Health;
         HP.setHealth(currHP);
-    }
-
-    /*
-     * We can have one game over function that loads the game over scene, and additionally have three functions.
-     * One for each of the different type of game over screens. This way everything can be modular and not have long functions and to have more flexibility.
-     */
-    public void GameOver()
-    {
-        /* How about having 2/3 different game over screens.
-         * One for for losing condition, The player loses all physical health value, mental or both.
-         * Each one has a different message, or even specific to the type of zombie that killed them.
-         * Nothing big or major, just a different game over message.
-         */
         if(Health <= 0.0f)
         {
             /* Either a new scene where we present the player with the game over screen and message.
