@@ -5225,7 +5225,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7492477704442105641}
   - component: {fileID: 3538294470379541843}
-  - component: {fileID: -7868799038371387901}
   m_Layer: 0
   m_Name: Buisness
   m_TagString: Untagged
@@ -5271,18 +5270,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7868799038371387901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7832164831409870227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40dad872ba0e2c34caf304c83ee1c406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7846898446310785521
 GameObject:
   m_ObjectHideFlags: 0
