@@ -5,13 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float physical = 20.0f, mental = 10.0f;
+    [SerializeField] public float Health = 20.0f;
     [SerializeField] Rigidbody playerBody;
+
+    public HPbar HP;
+    public float currHP;
 
     // Start is called before the first frame update
     void Start()
     {
         playerBody = GetComponent<Rigidbody>();
+        HP.setMaxHealth(Health);
+    }
+
+    private void Update() {
+        currHP = Health;
+        HP.setHealth(currHP);
     }
 
     /*
@@ -25,13 +34,12 @@ public class Player : MonoBehaviour
          * Each one has a different message, or even specific to the type of zombie that killed them.
          * Nothing big or major, just a different game over message.
          */
-        if(physical <= 0.0f || mental <= 0.0f)
+        if(Health <= 0.0f)
         {
             /* Either a new scene where we present the player with the game over screen and message.
              * This could be a new scene, or a canvas pops up and covers the entire screen. This acts as as the game over screen without loading a new scene.
              */
-            Debug.Log("Game Over");
-            //SceneManager.LoadScene("Retry");
+            SceneManager.LoadScene("GameOver");
             
         }
     }
