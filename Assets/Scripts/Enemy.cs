@@ -28,14 +28,17 @@ public class Enemy : MonoBehaviour
     public float CoolDown = 1.5f;
     private float distance;
     private EnemySpawner enemyCount;
+    
+    // Models
+    public GameObject BusinessModel;
+    public GameObject MusicModel;
+
 
     //enum for the types of zombie enemies
     public enum TypeOfZombie : int
-    {
-        CS = 0,
-        Business = 1,
-        Art = 2,
-        Music = 3
+    { 
+        Business = 0,
+        Music = 1
     }
 
     //Different action states for each zombie
@@ -85,7 +88,7 @@ public class Enemy : MonoBehaviour
         }
         //CS is a buffing character should append a one of two states (debating) an invincibility state to other zombies that are not CS
         //or a state where they do not take dmg until getting hit once.
-        else if(type == TypeOfZombie.CS) {action = EnemyState.Buff;}
+        // else if(type == TypeOfZombie.CS) {action = EnemyState.Buff;}
         //Music is a range character that once they spawn shoots at the player
         else if(type == TypeOfZombie.Music) {action = EnemyState.Shoot;}
         //Other types just do nothing and act as free points for the player to get
@@ -156,18 +159,22 @@ public class Enemy : MonoBehaviour
         //enemyCount.transform.gameObject.GetComponent<EnemySpawner>();
         switch (type)
         {
-            case TypeOfZombie.CS:
-                healthValue = 2.0f;
-                break;
+            // case TypeOfZombie.CS:
+            //     healthValue = 2.0f;
+            //     break;
             case TypeOfZombie.Business:
+                GameObject model1 = Instantiate(BusinessModel, transform);
+                model1.transform.localPosition = new Vector3(0f, -1f, 0f);
                 healthValue = 5.0f;
                 physicalATK = 2.0f;
                 mentalATK = 2.0f;
                 break;
-            case TypeOfZombie.Art:
-                healthValue = 1.0f;
-                break;
+            // case TypeOfZombie.Art:
+            //     healthValue = 1.0f;
+            //     break;
             case TypeOfZombie.Music:
+                GameObject model2 = Instantiate(MusicModel, transform);
+                model2.transform.localPosition = new Vector3(0f, -1f, 0f);
                 healthValue = 7.0f;
                 physicalATK = 3.0f;
                 mentalATK = 2.0f;

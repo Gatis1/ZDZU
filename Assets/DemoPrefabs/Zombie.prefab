@@ -84,7 +84,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358863832478632320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -165,6 +165,8 @@ MonoBehaviour:
   healthValue: 1
   attackValue: 0
   _shotInterval: 2.5
+  _shotSPD: 50
+  _meleeInterval: 4
   _zombieShot: {fileID: 8329295245325458326, guid: b3d643f683e43484681e86b582f18580, type: 3}
   _shootPoint: {fileID: 5426136984985149487}
   healthState: 0
@@ -172,8 +174,9 @@ MonoBehaviour:
   physicalATK: 0
   mentalATK: 0
   action: 0
-  CanHit: 1
   CoolDown: 1.5
+  BusinessModel: {fileID: 7832164831409870227, guid: 40904821fc8e47e468a60fff9f3b9208, type: 3}
+  MusicModel: {fileID: 268270508720329228, guid: 08c1cca315746f14d8d24f25b6ed87c5, type: 3}
 --- !u!1001 &1515906002573789522
 PrefabInstance:
   m_ObjectHideFlags: 0
