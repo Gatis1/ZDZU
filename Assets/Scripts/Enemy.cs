@@ -4,6 +4,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Player player;
+    public AudioSource Hit;
+    public AudioSource music;
+    public AudioSource business;
 
     //Zombie stats.
     [SerializeField] private float mvSpd = 1.0f;
@@ -132,6 +135,7 @@ public class Enemy : MonoBehaviour
         _meleeTime = _meleeInterval;
 
         player.Health -= physicalATK;
+        business.Play();
     }
 
     //shooting function to shot at the player.
