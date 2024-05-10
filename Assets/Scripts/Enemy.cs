@@ -131,8 +131,7 @@ public class Enemy : MonoBehaviour
 
         _meleeTime = _meleeInterval;
 
-        player.physical -= physicalATK;
-        player.mental -= mentalATK;
+        player.Health -= physicalATK;
     }
 
     //shooting function to shot at the player.
@@ -167,7 +166,6 @@ public class Enemy : MonoBehaviour
                 model1.transform.localPosition = new Vector3(0f, -1f, 0f);
                 healthValue = 5.0f;
                 physicalATK = 2.0f;
-                mentalATK = 2.0f;
                 break;
             // case TypeOfZombie.Art:
             //     healthValue = 1.0f;
