@@ -7,8 +7,7 @@ public class ZombieShot : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") 
         {
-            other.GetComponent<Player>().physical -= .2f;
-            other.GetComponent<Player>().mental -= .2f;
+            other.GetComponent<Player>().Health -= .2f;
             Destroy(gameObject);
         }
     }
