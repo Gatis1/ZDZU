@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour
     // Models
     public GameObject BusinessModel;
     public GameObject MusicModel;
-
+    public buis animate;
+    public music animate2;
 
     //enum for the types of zombie enemies
     public enum TypeOfZombie : int
@@ -61,6 +62,19 @@ public class Enemy : MonoBehaviour
         UpdateStats();
     }
 
+    IEnumerator died() // give time for the dying animation
+    {
+        if (type == TypeOfZombie.Business)
+        {
+            animate.die();
+        }
+        else{
+            animate2.die();
+        }
+        yield return new WaitForSeconds(1.0f); //wait 1 second
+        Destroy(this.gameObject); //destroy after death
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -70,7 +84,8 @@ public class Enemy : MonoBehaviour
     
         if(!CheckHealth())
         {
-            Destroy(this.gameObject);
+            StartCoroutine(died());
+           
         }
 
         //Added if statements to check for the types of zombies and what actions they should do
@@ -125,6 +140,7 @@ public class Enemy : MonoBehaviour
     //melee function to damage the playe when in range.
     private void meleeAttack()
     {
+        animate.attack();
         _meleeTime -= Time.deltaTime;
 
         if(_meleeTime > 0) {return;}
@@ -133,11 +149,13 @@ public class Enemy : MonoBehaviour
 
         player.physical -= physicalATK;
         player.mental -= mentalATK;
+
     }
 
     //shooting function to shot at the player.
     private void rangeAttack()
     {
+        animate2.attack();
         _shotTime -= Time.deltaTime;
 
         if(_shotTime > 0) { return; }
@@ -165,6 +183,7 @@ public class Enemy : MonoBehaviour
             case TypeOfZombie.Business:
                 GameObject model1 = Instantiate(BusinessModel, transform);
                 model1.transform.localPosition = new Vector3(0f, -1f, 0f);
+                animate = GetComponentInChildren<buis>();
                 healthValue = 5.0f;
                 physicalATK = 2.0f;
                 mentalATK = 2.0f;
@@ -175,6 +194,7 @@ public class Enemy : MonoBehaviour
             case TypeOfZombie.Music:
                 GameObject model2 = Instantiate(MusicModel, transform);
                 model2.transform.localPosition = new Vector3(0f, -1f, 0f);
+                animate2 = model2.GetComponent<music>();
                 healthValue = 7.0f;
                 physicalATK = 3.0f;
                 mentalATK = 2.0f;
