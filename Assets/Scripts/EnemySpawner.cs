@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             newZombie.transform.localPosition = new Vector3(Random.Range(-spawningRadiusAroundSpawner, spawningRadiusAroundSpawner), 1, Random.Range(-spawningRadiusAroundSpawner, spawningRadiusAroundSpawner));
             //Make the enemies vary in what actions they do when they spawn either melee or shooting.
             Enemy enemyState = newZombie.GetComponent<Enemy>();
-            enemyState.type = (Enemy.TypeOfZombie)Random.Range(0,3);
+            enemyState.type = (Enemy.TypeOfZombie)Random.Range(0,2);
 
             enemyCount++;
         }

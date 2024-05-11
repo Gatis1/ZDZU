@@ -4,6 +4,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Player player;
+    
+    // Audio clips
     public AudioSource Hit;
     public AudioSource music;
     public AudioSource business;
