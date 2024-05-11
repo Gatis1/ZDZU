@@ -151,8 +151,9 @@ public class Enemy : MonoBehaviour
 
         _shotTime = _shotInterval;
 
-        music.Play();
+        
         GameObject enemShot = Instantiate(_zombieShot, _shootPoint.transform.position, Quaternion.identity) as GameObject;
+        music.Play();
         Rigidbody eShotRig = enemShot.GetComponent<Rigidbody>();
 
         // Calculate direction towards player
