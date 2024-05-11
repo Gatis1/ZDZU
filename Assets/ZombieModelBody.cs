@@ -29,14 +29,14 @@ public class ZombieModelBody : MonoBehaviour
         // If it's music zombie
         if (enemy.type == Enemy.TypeOfZombie.Music)
         {
-            // Make it stand still in idle
+            // Make it stand still in idle, which is their entry state. So no need to do anything
             return;
         }
 
         // if it's business
         if (enemy.type == Enemy.TypeOfZombie.Business)
         {
-            // Check the state
+            // Check the state and apply the desired animation
             switch (enemy.action)
             {
                 case Enemy.EnemyState.chase:
@@ -50,11 +50,6 @@ public class ZombieModelBody : MonoBehaviour
                     break;
                 
             }
-
-            return;
         }
-
-        return;
-
     }
 }

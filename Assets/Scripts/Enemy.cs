@@ -70,6 +70,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckHealth();
+        MakeZombieFacePlayer();
+        
         //get the distance between the player and enemies for attacking logic.
         distance = Vector3.Distance(transform.position, player.transform.position);
     
@@ -219,5 +221,14 @@ public class Enemy : MonoBehaviour
             healthValue -= attackValue;
             Hit.Play();
         }
+    }
+
+    private void MakeZombieFacePlayer()
+    {
+        // Calculate the direction from the zombie to the player
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+            
+        // Rotate the object to face the player
+        transform.rotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
     }
 }
