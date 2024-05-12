@@ -169,8 +169,8 @@ MonoBehaviour:
   business: {fileID: 8944503879835169796}
   mvSpd: 1
   healthValue: 1
-  attackValue: 0
-  _shotInterval: 2.5
+  attackValue: 2
+  _shotInterval: 20
   _shotSPD: 50
   _meleeInterval: 4
   _zombieShot: {fileID: 8329295245325458326, guid: b3d643f683e43484681e86b582f18580, type: 3}
