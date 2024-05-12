@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1042,7 +1042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: enemyNum
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: waitTime
@@ -1050,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawnTime
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawningRadiusAroundSpawner
@@ -1066,11 +1066,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.5
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.2
+      value: 44.36
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1119,7 +1119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: enemyNum
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: waitTime
@@ -1127,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawnTime
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawningRadiusAroundSpawner
@@ -1139,15 +1139,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: -7.3
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.5
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.5
+      value: 35.5
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1468,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: enemyNum
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: waitTime
@@ -1476,7 +1476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawnTime
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485914, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: spawningRadiusAroundSpawner
@@ -1488,15 +1488,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.1
+      value: 9.77
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.5
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.6
+      value: 37.4
       objectReference: {fileID: 0}
     - target: {fileID: 3520706206293485915, guid: 5859a4f8e57fb344cbeaa0ea8f1fff84, type: 3}
       propertyPath: m_LocalRotation.w
